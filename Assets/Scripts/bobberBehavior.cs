@@ -60,6 +60,22 @@ public class bobberBehavior : MonoBehaviour
         if (tiltRight) { curCord_X += bobSpeed; }
         if (tiltLeft) { curCord_X -= bobSpeed; }
 
+        ///We need to: 
+        ///set the position of bobber to the curPos equivalent to real Space 
+        ///So we need to make a ratioConversion value
+        ///set our bober to the converted value plus is starting pos
+        ///_We need to make a countdown timer
+        ///We need a condition so that 
+        ///if at the end of the timer if the fish didn't get away, then you win
+        ///if before or at the end of the timer the fish gets away, the you lose
+        ///_We need to emulate the buzzing that equates to proximity (lets use sound for now). 
+        ///We can make it so that the sound is fired 
+        ///then must wait for timer cycle to reset
+        ///the timer cycle is relitive to the percent away from target
+        ///if you're close the percent is low, thus the buzz will fire more often
+        ///_We need to make a fish can get away if you're not careful
+        ///
+
 
 
     }
