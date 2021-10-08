@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class bobberBehavior : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class bobberBehavior : MonoBehaviour
     public float curCord_Z;
 
     float fishRange=500;
-    float bobSpeed=1;
+    float bobSpeed=2;
 
     public bool tiltLeft, tiltRight, tiltUp, tiltDown;
 
@@ -19,7 +20,18 @@ public class bobberBehavior : MonoBehaviour
     GameObject[] bounds;
 
     public float inGameRange;
+    //
+    public float calibrateCord;
+    Vector2 fishTargetPos, curTargetPos;
 
+    float clockMax = 30;
+    float timeRemaining;
+    Image clock;
+
+    bool gameCondition; //true win, false lose
+
+    public AudioSource beeper;
+    public AudioClip beepsound;
 
 
     // Start is called before the first frame update
@@ -32,11 +44,26 @@ public class bobberBehavior : MonoBehaviour
             fishCord_Z = Random.Range(-fishRange, fishRange);
         }
 
-
         centerBobber = GameObject.Find("bobberCenter");
         bounds = GameObject.FindGameObjectsWithTag("bobberLimit");
 
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
+        
+        //
+
+        //This is making the ratio between the in game cords and the fishRange
+        calibrateCord = inGameRange * (1 / fishRange);
+        
+        //This is the ingame cordinates of the fish position
+        float newX = (fishCord_X * calibrateCord)+centerBobber.transform.position.x;
+        float newY = (centerBobber.transform.position.y);
+        float newZ = (fishCord_Z * calibrateCord)+ centerBobber.transform.position.z;
+        fishTargetPos = new Vector3(newX, newY, newZ);
+
+
+        //This is the clock for the catch timer
+        clock = GameObject.Find("Clock").GetComponent<Image>();
+        timeRemaining = clockMax;
     }
 
     // Update is called once per frame
@@ -60,6 +87,7 @@ public class bobberBehavior : MonoBehaviour
         if (tiltRight) { curCord_X += bobSpeed; }
         if (tiltLeft) { curCord_X -= bobSpeed; }
 
+
         ///We need to: 
         ///set the position of bobber to the curPos equivalent to real Space 
         ///So we need to make a ratioConversion value
@@ -78,5 +106,50 @@ public class bobberBehavior : MonoBehaviour
 
 
 
+        //This will translate the bobber accordingly
+        //What might these following floats are supposed to be? 
+        float curX = 1;
+        float curY = 1;
+        float curZ = 1;        
+        this.transform.position = new Vector3(curX, curY, curZ);
+
+        
+        
+        //This will get the time
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            clock.fillAmount = timeRemaining / clockMax;
+        }
+
+        //This will determine the win/lose scenarios
+        if (timeRemaining <= 0)
+        {
+            print("there must be some sort of win/lose condition");
+
+            //if ("The losing Condition") { gameCondition = false; }
+            //if ("The Winning Condition") { gameCondition = true; }
+        }
+
+        if (!gameCondition)
+        {
+            print("you lose");
+        }
+        if (gameCondition)
+        {
+            print("you win");
+        }
+
+
+        //audioSource.PlayOneShot(clip, volume);
+
     }
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(fishTargetPos, 1);
+
+    }
+
 }
