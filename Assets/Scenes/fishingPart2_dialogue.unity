@@ -546,6 +546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ocean
       objectReference: {fileID: 0}
+    - target: {fileID: 842396324585848870, guid: 5d6ca7ae5a203af40bbaf8c5233f982f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00de197276a8afe4aac244a00484c32b, type: 2}
     - target: {fileID: 842396324585848872, guid: 5d6ca7ae5a203af40bbaf8c5233f982f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -671,6 +675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish_bugEye
       objectReference: {fileID: 0}
+    - target: {fileID: 2869344807088711131, guid: 560173606410ac141baf088ff3cc749e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00de197276a8afe4aac244a00484c32b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 560173606410ac141baf088ff3cc749e, type: 3}
 --- !u!1 &1163548885
@@ -940,6 +948,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -14.37
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 65b2d46c080ecb34a898d21c4a81f19d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7c0906b6278e0f46a5298dce04e0b37, type: 2}
     - target: {fileID: 919132149155446097, guid: 65b2d46c080ecb34a898d21c4a81f19d, type: 3}
       propertyPath: m_Name
       value: fish_crown
@@ -1519,6 +1531,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish_whisker
       objectReference: {fileID: 0}
+    - target: {fileID: 1170970068873931921, guid: c19e4139fe56020438aee64652d1590e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 00de197276a8afe4aac244a00484c32b, type: 2}
     - target: {fileID: 5898855749840620490, guid: c19e4139fe56020438aee64652d1590e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0446
