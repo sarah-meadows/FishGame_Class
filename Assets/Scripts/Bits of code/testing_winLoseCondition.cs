@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class fishingCasting : MonoBehaviour
+public class testing_winLoseCondition : MonoBehaviour
 {
     Button CastLineBtn;
 
@@ -40,13 +40,13 @@ public class fishingCasting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void castFishingLine_event()
     {
         //when you press the casting button...
-        if (isCurrentlyFishing==false)
+        if (isCurrentlyFishing == false)
         {
             //if you are not fishing, then activate fishing
             isCurrentlyFishing = true;
@@ -73,7 +73,7 @@ public class fishingCasting : MonoBehaviour
 
         }
 
-        else if (isCurrentlyFishing==true)
+        else if (isCurrentlyFishing == true)
         {
             //otherwise if you are fishing and want to retract line, then deactivate fishing
             isCurrentlyFishing = false;
