@@ -23,13 +23,13 @@ public class bobberBehavior : MonoBehaviour
     public float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
-    public float distFromTarget, percentFromTarget;
+    public float distFromTarget, valueAwayFromFish;
     
     Image clock;
     float maxSeconds = 20f;
     float timeRemaining;
 
-    bool winGame=false, loseGame=false;
+    bool winGame = false;
 
     public AudioSource audioSource;
     public AudioClip clip;
@@ -113,13 +113,17 @@ public AudioClip beepsound;
 
         //getting the distance from goal and percentage away from goal
         distFromTarget = Vector3.Distance(fishTargetPos, curTargetPos);
-        percentFromTarget = (distFromTarget / calibrateCord) / (fishRange * 2);
+        valueAwayFromFish = (distFromTarget / calibrateCord) / (fishRange * 2);
+
+        ///print shows in the console how far away we are from fish
+        ///0% is when you're dead-on
+        ///the larger the percent, the further away you are
+        float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
 
 
         //setting up the buzzing indicator
         if (!buzzTimerIsBusy){StartCoroutine(buzzIndicate());}
-
-
+        
 
         //Setting up our timer and win conditions
         if (timeRemaining > 0)
@@ -129,8 +133,10 @@ public AudioClip beepsound;
         }
         if(timeRemaining <= 0)
         {
-            //set our win/lose conditions
-            //if(our check and balance is true){winGame=true; }
+
+            if (percentageFromFish <= 5){winGame=true; }
+            else if (percentageFromFish > 5){ winGame = false;  }
+
             //if(our check and balance is false){loseGame=true; }
         }
 
@@ -139,7 +145,7 @@ public AudioClip beepsound;
             //do a prompt and continue to next scene
         }
 
-        if (loseGame)
+        if (!winGame)
         {
             //do a prompt and allow fishing again
         }
@@ -151,7 +157,7 @@ public AudioClip beepsound;
     IEnumerator buzzIndicate()
     {
         buzzTimerIsBusy = true;
-        yield return new WaitForSeconds(percentFromTarget);
+        yield return new WaitForSeconds(valueAwayFromFish);
         audioSource.PlayOneShot(clip, volume);
         buzzTimerIsBusy = false;
     }
