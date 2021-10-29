@@ -34,7 +34,7 @@ public class bobberBehavior : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip clip;
-    public float volume = 0.1f;
+    public float volume = 0.05f;
 
     bool buzzTimerIsBusy;
 
@@ -137,13 +137,11 @@ public class bobberBehavior : MonoBehaviour
             {
                 print("WIN: do a prompt and continue to next scene");
                 winAlert.SetActive(true);
-                loseAlert.SetActive(false);
             }
 
             else if (!winGame)
             {
                 print("LOSE: do a prompt and allow fishing again");
-                winAlert.SetActive(false);
                 loseAlert.SetActive(true);
 
             }
