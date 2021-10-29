@@ -17,6 +17,7 @@ public class fishingCasting : MonoBehaviour
     Vector3 bobberClonePos;
 
     public int range_fishType;
+
     static public int cur_fishType;
 
     public float minWaitTime, maxWaitTime;
@@ -43,7 +44,7 @@ public class fishingCasting : MonoBehaviour
         
     }
 
-    void castFishingLine_event()
+    public void castFishingLine_event()
     {
         //when you press the casting button...
         if (isCurrentlyFishing==false)
@@ -77,6 +78,8 @@ public class fishingCasting : MonoBehaviour
         {
             //otherwise if you are fishing and want to retract line, then deactivate fishing
             isCurrentlyFishing = false;
+            //destroy the clone we made earlier based upon the name of the gameObject
+            Destroy(GameObject.Find("newBobber"));
 
             //now you're trying to catch fish...
             StopCoroutine(fishTimer());
@@ -88,13 +91,16 @@ public class fishingCasting : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         print("Time to catch");
+        
+        GameObject newBobBehave = Instantiate(bobberWithBehavior);
+        newBobBehave.transform.position = GameObject.Find("newbobber").transform.position;
 
         GameObject discardBob = GameObject.Find("newBobber");
         Destroy(discardBob);
 
         clockObj.SetActive(true);
 
-        GameObject newBobBehave = Instantiate(bobberWithBehavior);
+
 
 
     }
