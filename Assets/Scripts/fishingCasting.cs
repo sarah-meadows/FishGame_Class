@@ -37,7 +37,7 @@ public class fishingCasting : MonoBehaviour
         
     }
 
-    void castFishingLine_event()
+    public void castFishingLine_event()
     {
         //when you press the casting button...
         if (isCurrentlyFishing==false)
@@ -71,7 +71,7 @@ public class fishingCasting : MonoBehaviour
     IEnumerator fishTimer()
     {
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-        print("Time to catch");
+        Debug.Log("Time to catch");
         GameObject newBobBehave = Instantiate(bobberWithBehavior);
         newBobBehave.transform.position = GameObject.Find("newbobber").transform.position;
 

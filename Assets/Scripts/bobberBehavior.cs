@@ -62,7 +62,7 @@ public AudioClip beepsound;
 
         centerBobber = GameObject.Find("bobberCenter");
         bounds = GameObject.FindGameObjectsWithTag("bobberLimit");
-
+        
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
         calibrateCord = inGameRange * (1 / fishRange);
 
