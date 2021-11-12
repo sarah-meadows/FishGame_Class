@@ -52,10 +52,10 @@ public class startSceneFishConvo : MonoBehaviour
         
         if (mainAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-           // if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-           // {
+            if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
                 introIsComplete = true;
-           // }
+            }
         }
 
 
