@@ -12,7 +12,7 @@ public class bobberBehavior : MonoBehaviour
     public float curCord_Z;
 
     public float fishRange=500;
-    float bobSpeed=2;
+    float bobSpeed=4;
 
     bool tiltLeft, tiltRight, tiltUp, tiltDown;
 
@@ -26,10 +26,11 @@ public class bobberBehavior : MonoBehaviour
     public float distFromTarget, valueAwayFromFish;
     
     Image clock;
-    float maxSeconds = 20f;
+    float maxSeconds = 10f;
     float timeRemaining;
 
     bool winGame = false;
+    GameObject winAlert, loseAlert;
 
     public AudioSource audioSource;
     public AudioClip clip;
@@ -37,18 +38,6 @@ public class bobberBehavior : MonoBehaviour
 
     bool buzzTimerIsBusy;
 
-    /**
-Vector2 fishTargetPos, curTargetPos;
-
-float clockMax = 30;
-float timeRemaining;
-Image clock;
-
-bool gameCondition; //true win, false lose
-
-public AudioSource beeper;
-public AudioClip beepsound;
-*/
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +67,13 @@ public AudioClip beepsound;
 
         clock = GameObject.Find("Clock").GetComponent<Image>();
         timeRemaining = maxSeconds;
+
+
+        winAlert = GameObject.Find("conditionWin");
+        loseAlert = GameObject.Find("conditionLose");
+
+        winAlert.SetActive(false);
+        loseAlert.SetActive(false);
     
     }
 
@@ -135,19 +131,23 @@ public AudioClip beepsound;
         {
 
             if (percentageFromFish <= 5){winGame=true; }
-            else if (percentageFromFish > 5){ winGame = false;  }
+            else if (percentageFromFish > 5){ winGame = false; }
 
-            //if(our check and balance is false){loseGame=true; }
-        }
+            if (winGame)
+            {
+                print("WIN: do a prompt and continue to next scene");
+                winAlert.SetActive(true);
+                loseAlert.SetActive(false);
+            }
 
-        if (winGame)
-        {
-            //do a prompt and continue to next scene
-        }
+            else if (!winGame)
+            {
+                print("LOSE: do a prompt and allow fishing again");
+                winAlert.SetActive(false);
+                loseAlert.SetActive(true);
 
-        if (!winGame)
-        {
-            //do a prompt and allow fishing again
+            }
+
         }
 
 

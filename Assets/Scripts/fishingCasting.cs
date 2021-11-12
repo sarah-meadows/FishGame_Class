@@ -36,6 +36,8 @@ public class fishingCasting : MonoBehaviour
         //Find the timer, then set it inactive
         clockObj = GameObject.Find("Clock");
         clockObj.SetActive(false);
+        GameObject.Find("WinLosePopUp_1").SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -99,6 +101,7 @@ public class fishingCasting : MonoBehaviour
         Destroy(discardBob);
 
         clockObj.SetActive(true);
+        GameObject.Find("WinLosePopUp_1").SetActive(true);
 
 
 

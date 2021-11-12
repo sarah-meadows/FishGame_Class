@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class returnToDialogue : MonoBehaviour
 {
+
 	public void LoadScene(string sceneName)
 	{
 		SceneManager.LoadScene(1);
-
 	}
 
 }
