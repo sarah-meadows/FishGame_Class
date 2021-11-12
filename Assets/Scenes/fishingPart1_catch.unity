@@ -935,6 +935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
@@ -948,6 +949,17 @@ MonoBehaviour:
   m_PresetInfoIsWorld: 0
 --- !u!223 &999689448
 Canvas:
+=======
+  isCurrentlyFishing: 0
+  bobberDecoration: {fileID: 1001171171660822109, guid: ccb5e5472517f964794650da1c1067fe, type: 3}
+  bobberWithBehavior: {fileID: 5243532940762803393, guid: 755d22e70668eac4aaccc9a3eedaba24, type: 3}
+  bobbermain: {fileID: 8005061147141384103, guid: bb4e28891a263e746bc8862c3e9e626d, type: 3}
+  range_fishType: 0
+  minWaitTime: 1
+  maxWaitTime: 5
+--- !u!1 &956614990
+GameObject:
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
