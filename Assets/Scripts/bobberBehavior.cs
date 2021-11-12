@@ -12,7 +12,7 @@ public class bobberBehavior : MonoBehaviour
     public float curCord_Z;
 
     public float fishRange=500;
-    float bobSpeed=2;
+    float bobSpeed=4;
 
     bool tiltLeft, tiltRight, tiltUp, tiltDown;
 
@@ -23,32 +23,21 @@ public class bobberBehavior : MonoBehaviour
     public float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
-    public float distFromTarget, percentFromTarget;
+    public float distFromTarget, valueAwayFromFish;
     
     Image clock;
-    float maxSeconds = 20f;
+    float maxSeconds = 10f;
     float timeRemaining;
 
-    bool winGame=false, loseGame=false;
+    bool winGame = false;
+    GameObject winAlert, loseAlert;
 
     public AudioSource audioSource;
     public AudioClip clip;
-    public float volume = 0.1f;
+    public float volume = 0.05f;
 
     bool buzzTimerIsBusy;
 
-    /**
-Vector2 fishTargetPos, curTargetPos;
-
-float clockMax = 30;
-float timeRemaining;
-Image clock;
-
-bool gameCondition; //true win, false lose
-
-public AudioSource beeper;
-public AudioClip beepsound;
-*/
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +51,7 @@ public AudioClip beepsound;
 
         centerBobber = GameObject.Find("bobberCenter");
         bounds = GameObject.FindGameObjectsWithTag("bobberLimit");
-
+        
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
         calibrateCord = inGameRange * (1 / fishRange);
 
@@ -78,6 +67,13 @@ public AudioClip beepsound;
 
         clock = GameObject.Find("Clock").GetComponent<Image>();
         timeRemaining = maxSeconds;
+
+
+        winAlert = GameObject.Find("conditionWin");
+        loseAlert = GameObject.Find("conditionLose");
+
+        winAlert.SetActive(false);
+        loseAlert.SetActive(false);
     
     }
 
@@ -113,13 +109,17 @@ public AudioClip beepsound;
 
         //getting the distance from goal and percentage away from goal
         distFromTarget = Vector3.Distance(fishTargetPos, curTargetPos);
-        percentFromTarget = (distFromTarget / calibrateCord) / (fishRange * 2);
+        valueAwayFromFish = (distFromTarget / calibrateCord) / (fishRange * 2);
+
+        ///print shows in the console how far away we are from fish
+        ///0% is when you're dead-on
+        ///the larger the percent, the further away you are
+        float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
 
 
         //setting up the buzzing indicator
         if (!buzzTimerIsBusy){StartCoroutine(buzzIndicate());}
-
-
+        
 
         //Setting up our timer and win conditions
         if (timeRemaining > 0)
@@ -129,19 +129,23 @@ public AudioClip beepsound;
         }
         if(timeRemaining <= 0)
         {
-            //set our win/lose conditions
-            //if(our check and balance is true){winGame=true; }
-            //if(our check and balance is false){loseGame=true; }
-        }
 
-        if (winGame)
-        {
-            //do a prompt and continue to next scene
-        }
+            if (percentageFromFish <= 5){winGame=true; }
+            else if (percentageFromFish > 5){ winGame = false; }
 
-        if (loseGame)
-        {
-            //do a prompt and allow fishing again
+            if (winGame)
+            {
+                print("WIN: do a prompt and continue to next scene");
+                winAlert.SetActive(true);
+            }
+
+            else if (!winGame)
+            {
+                print("LOSE: do a prompt and allow fishing again");
+                loseAlert.SetActive(true);
+
+            }
+
         }
 
 
@@ -151,7 +155,7 @@ public AudioClip beepsound;
     IEnumerator buzzIndicate()
     {
         buzzTimerIsBusy = true;
-        yield return new WaitForSeconds(percentFromTarget);
+        yield return new WaitForSeconds(valueAwayFromFish);
         audioSource.PlayOneShot(clip, volume);
         buzzTimerIsBusy = false;
     }
