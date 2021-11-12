@@ -11,6 +11,7 @@ public class fishingCasting : MonoBehaviour
 
     public GameObject bobberDecoration;
     public GameObject bobberWithBehavior;
+    public GameObject bobbermain;
 
     GameObject clockObj,winLoseAlertParent;
 
@@ -57,10 +58,15 @@ public class fishingCasting : MonoBehaviour
             isCurrentlyFishing = true;
 
             //Make a new gameObject, and make it equal to: whatever we're cloning. Give it a new name (we'll use this for when we delete the object)
+            GameObject newbobmain = Instantiate(bobbermain);
+            newbobmain.transform.position = bobberClonePos;
+            newbobmain.name = "BobberMain";
             GameObject newBobber = Instantiate(bobberDecoration);
-            newBobber.transform.position = bobberClonePos;
-            newBobber.name = "newBobber";
+            newBobber.transform.parent = GameObject.Find("ParentBobber").transform;
 
+            //newBobber.transform.position = bobberClonePos;
+            newBobber.name = "newBobber";
+              
             //ADD AN ANIMATION FOR BOBBER
             /// Casting animation
             /// idle bobber animation
@@ -83,7 +89,7 @@ public class fishingCasting : MonoBehaviour
             //otherwise if you are fishing and want to retract line, then deactivate fishing
             isCurrentlyFishing = false;
             //destroy the clone we made earlier based upon the name of the gameObject
-            Destroy(GameObject.Find("newBobber"));
+            Destroy(GameObject.Find("BobberMain"));
 
             //now you're trying to catch fish...
             StopCoroutine(fishTimer());
@@ -96,7 +102,7 @@ public class fishingCasting : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         print("Time to catch");
         
-        GameObject discardBob = GameObject.Find("newBobber");
+        GameObject discardBob = GameObject.Find("BobberMain");
         Destroy(discardBob);
 
         clockObj.SetActive(true);
