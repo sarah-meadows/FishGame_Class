@@ -213,6 +213,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fisherman
       objectReference: {fileID: 0}
+    - target: {fileID: 8196323191032645886, guid: 147ef780a2a54aa47b972ffb7db189f9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ba67afb9c150f24c8e4bad6e1aa1ef3, type: 2}
     - target: {fileID: 9184484670799621285, guid: 147ef780a2a54aa47b972ffb7db189f9, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -452,7 +456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   convoCounter: 0
-  dialogueBranch: 0
+  convoPossibility: 0
   happyPoints: 0
 --- !u!114 &453752192
 MonoBehaviour:
