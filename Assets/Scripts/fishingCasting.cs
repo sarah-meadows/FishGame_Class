@@ -12,7 +12,8 @@ public class fishingCasting : MonoBehaviour
     public GameObject bobberDecoration;
     public GameObject bobberWithBehavior;
 
-    GameObject clockObj;
+    GameObject clockObj,winLoseAlertParent;
+
 
     Vector3 bobberClonePos;
 
@@ -36,6 +37,9 @@ public class fishingCasting : MonoBehaviour
         //Find the timer, then set it inactive
         clockObj = GameObject.Find("Clock");
         clockObj.SetActive(false);
+        winLoseAlertParent = GameObject.Find("WinLosePopUp_1");
+        winLoseAlertParent.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -92,13 +96,16 @@ public class fishingCasting : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
         print("Time to catch");
         
-        GameObject newBobBehave = Instantiate(bobberWithBehavior);
-        newBobBehave.transform.position = GameObject.Find("newbobber").transform.position;
-
         GameObject discardBob = GameObject.Find("newBobber");
         Destroy(discardBob);
 
         clockObj.SetActive(true);
+        winLoseAlertParent.SetActive(true);
+
+        GameObject newBobBehave = Instantiate(bobberWithBehavior);
+        newBobBehave.transform.position = GameObject.Find("bobberCenter").transform.position;
+
+
 
 
 
