@@ -19,9 +19,11 @@ public class triggerAnimations : MonoBehaviour
     
 private void OnTriggerEnter(Collider other)
   {
-   // if (other.gameobject.tag -- "Player") 
+    if (other.gameObject.tag == "Player") 
    {
-      // this.gameObject.GetComponent<Animator>()
+            print("triggered by player");
+            this.gameObject.GetComponent<Animator>();
+
    }
   }
 }
