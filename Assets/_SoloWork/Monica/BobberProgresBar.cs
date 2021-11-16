@@ -22,7 +22,7 @@ public class BobberProgresBar : MonoBehaviour
     }
     void Update()
     {
-        slider.value = 1 - (Mathf.Round((bobber.valueAwayFromFish * 100) * 10.0f) * 0.1f) / 100;
+        slider.value = 1 - Mathf.Round((bobber.valueAwayFromFish * 100) * 10.0f) * 0.1f / 100;
 
 
 

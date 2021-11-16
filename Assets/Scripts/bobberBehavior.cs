@@ -24,7 +24,7 @@ public class bobberBehavior : MonoBehaviour
     float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
-    float distFromTarget, valueAwayFromFish;
+    public float distFromTarget, valueAwayFromFish;
     
     Image clock;
     float maxSeconds = 10f;
