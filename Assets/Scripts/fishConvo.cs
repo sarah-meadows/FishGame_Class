@@ -34,6 +34,7 @@ public class fishConvo : MonoBehaviour
         btnA.onClick.AddListener(answerOptions);
         btnB.onClick.AddListener(answerOptions);
 
+        
     }
 
     // Update is called once per frame
