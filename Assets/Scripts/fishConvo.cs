@@ -17,7 +17,11 @@ public class fishConvo : MonoBehaviour
     Text fishStatement;
     Text responseA, responseB, responseC;
 
-    Button btnA, btnB;
+    Button btnContinue, btnA, btnB;
+
+    bool endOfConvo;
+    bool winLoseState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,12 +38,40 @@ public class fishConvo : MonoBehaviour
         btnA.onClick.AddListener(answerOptions);
         btnB.onClick.AddListener(answerOptions);
 
+        btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
+        btnContinue.gameObject.SetActive(false);
         
+        endOfConvo = false;
+        winLoseState = false;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (endOfConvo)
+        {
+            //if the end of the conversation happens...
+            btnA.gameObject.SetActive(false);
+            btnB.gameObject.SetActive(false);
+            btnContinue.gameObject.SetActive(true);
+
+
+            if (winLoseState == true)
+            {
+                print(" we win");
+
+
+            }
+            if (winLoseState == false)
+            {
+                print(" we lose");
+
+            }
+
+        }
+
+
         if (fishType == 0)
         {
             //////////////////////////////////
@@ -392,7 +424,7 @@ public class fishConvo : MonoBehaviour
             {
                 if (convoPossibility == 0)
                 {
-                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; return; }
+                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; endOfConvo = true; winLoseState = false; return; }
                     if (choice == 1) { convoPossibility = 1; convoCounter = 2; return; }
                 }
 
