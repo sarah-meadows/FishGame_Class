@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class triggerAnimations : MonoBehaviour
 {
-    public Animator BobberAnim ;
+    Animator BobberAnim;
     // Start is called before the first frame update
     void Start()
     {
-        
+        BobberAnim = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(BobberAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
-        if(BobberAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >=1.0f){
-            if(this.gameObject.GetComponent<Animator>().GetInteger("animState")== 0){
-                this.gameObject.GetComponent<Animator>().SetInteger("animState", 1);
+
+        ///READ PLEASE!!! Teacher note:
+        ///Let's consolidate code. 
+        ///See if you can integrade this code into the sccript fishingCasting script. 
+        ///It's good to have your code in one place. 
+        ///However, this is minimal priority. 
+        ///Let's entire game to function before cleaning up this code. 
+        ///
+        
+        //print(BobberAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (BobberAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            if (BobberAnim.gameObject.GetComponent<Animator>().GetInteger("animState") == 0)
+            {
+                BobberAnim.gameObject.GetComponent<Animator>().SetInteger("animState", 1);
             }
         }
-        //print(BobberAnim.GetCurrentAnimatorStateInfo (0).IsName (current_state_name) );
 
     }
-    
-private void OnTriggerEnter(Collider other)
-  {
-    if (other.gameObject.tag == "Player") 
-   {
-      this.gameObject.GetComponent<Animator>().SetInteger("animState", 1);
-   }
-  }
-private void OnTriggerExit(Collider other)
-  {
-    if (other.gameObject.tag == "Player") 
-   {
-      this.gameObject.GetComponent<Animator>().SetInteger("animState", 0);
-   }
-  }}
+    /*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            this.gameObject.GetComponent<Animator>().SetInteger("animState", 1);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            this.gameObject.GetComponent<Animator>().SetInteger("animState", 0);
+        }
+    }
+    */
+}

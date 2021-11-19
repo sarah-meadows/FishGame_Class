@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class bobberBehavior : MonoBehaviour
 {
-    public float fishCord_X;
-    public float fishCord_Z;
+    float fishCord_X;
+    float fishCord_Z;
 
-    public float curCord_X;
-    public float curCord_Z;
+    float curCord_X;
+    float curCord_Z;
 
     public float fishRange=500;
+    public float withinTarget = 10f;
     float bobSpeed=4;
 
     bool tiltLeft, tiltRight, tiltUp, tiltDown;
@@ -19,8 +20,8 @@ public class bobberBehavior : MonoBehaviour
     GameObject centerBobber;
     GameObject[] bounds;
 
-    public float inGameRange;
-    public float calibrateCord;
+    float inGameRange;
+    float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
     public float distFromTarget, valueAwayFromFish;
@@ -32,9 +33,8 @@ public class bobberBehavior : MonoBehaviour
     bool winGame = false;
     GameObject winAlert, loseAlert;
 
-    public AudioSource audioSource;
-    public AudioClip clip;
-    public float volume = 0.05f;
+    Image BuzzTEST;
+    Color32 buzzColor;
 
     bool buzzTimerIsBusy;
 
@@ -74,7 +74,12 @@ public class bobberBehavior : MonoBehaviour
 
         winAlert.SetActive(false);
         loseAlert.SetActive(false);
-    
+
+        BuzzTEST = GameObject.Find("BuzzTEST").GetComponent<Image>();
+        buzzColor = BuzzTEST.gameObject.GetComponent<Image>().color;
+        buzzColor = new Color32(0, 19, 225, 0);
+        BuzzTEST.color = buzzColor;
+
     }
 
     // Update is called once per frame
@@ -130,8 +135,8 @@ public class bobberBehavior : MonoBehaviour
         if(timeRemaining <= 0)
         {
 
-            if (percentageFromFish <= 5){winGame=true; }
-            else if (percentageFromFish > 5){ winGame = false; }
+            if (percentageFromFish <= withinTarget){winGame=true; }
+            else if (percentageFromFish > withinTarget){ winGame = false; }
 
             if (winGame)
             {
@@ -155,9 +160,16 @@ public class bobberBehavior : MonoBehaviour
     IEnumerator buzzIndicate()
     {
         buzzTimerIsBusy = true;
+                
         yield return new WaitForSeconds(valueAwayFromFish);
-        audioSource.PlayOneShot(clip, volume);
+        buzzColor = new Color32(0, 19, 225, 20);
+        BuzzTEST.color = buzzColor;
+
+        yield return new WaitForSeconds((valueAwayFromFish));
         buzzTimerIsBusy = false;
+        buzzColor = new Color32(0, 19, 225, 0);
+        BuzzTEST.color = buzzColor;
+
     }
 
     private void OnDrawGizmos()

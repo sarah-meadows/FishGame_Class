@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class startSceneFishConvo : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class startSceneFishConvo : MonoBehaviour
     Animator fishAnim;
 
     Camera introCam, mainCam;
+
+    Canvas canvas;
 
     public bool introIsComplete;
 
@@ -26,9 +29,13 @@ public class startSceneFishConvo : MonoBehaviour
         introCam = GameObject.Find("IntroCam").GetComponent<Camera>();
         mainCam = Camera.main;
 
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+
         introIsComplete = false;
         //on start make display2
         //when animation is complete, change display to 1 (main cam);
+
+        canvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -52,10 +59,10 @@ public class startSceneFishConvo : MonoBehaviour
         
         if (mainAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-            if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
+         //   if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+         //   {
                 introIsComplete = true;
-            }
+          //  }
         }
 
 
@@ -71,6 +78,7 @@ public class startSceneFishConvo : MonoBehaviour
             mainCam.gameObject.SetActive(true);
             introCam.gameObject.SetActive(false);
 
+            canvas.enabled = true;
         }
     }
 }
