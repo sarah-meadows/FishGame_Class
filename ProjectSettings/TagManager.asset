@@ -6,7 +6,6 @@ TagManager:
   tags:
   - bobberLimit
   - bobber
-  - introFish
   layers:
   - Default
   - TransparentFX
