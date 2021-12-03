@@ -25,7 +25,9 @@ public class bobberBehavior : MonoBehaviour
 
     Vector3 fishTargetPos, curTargetPos;
     public float distFromTarget, valueAwayFromFish;
-    
+
+    Slider proximitySlider;
+
     Image clock;
     float maxSeconds = 10f;
     float timeRemaining;
@@ -55,6 +57,7 @@ public class bobberBehavior : MonoBehaviour
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
         calibrateCord = inGameRange * (1 / fishRange);
 
+        proximitySlider = GameObject.Find("proximitySlider").GetComponent<Slider>();
 
         //This is the ingame cordinates of the fish position
         float newX = (fishCord_X * calibrateCord) + centerBobber.transform.position.x;
@@ -120,6 +123,15 @@ public class bobberBehavior : MonoBehaviour
         ///0% is when you're dead-on
         ///the larger the percent, the further away you are
         float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
+
+
+        proximitySlider.value = 1 - valueAwayFromFish;
+
+
+
+
+
+
 
 
         //setting up the buzzing indicator
