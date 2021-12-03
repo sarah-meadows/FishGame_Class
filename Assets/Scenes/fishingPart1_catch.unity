@@ -1302,8 +1302,8 @@ MonoBehaviour:
   bobberMain: {fileID: 3492058570008079504, guid: ada67f10b5eb7be49ad066dda63eb142, type: 3}
   bobberToClone: {fileID: 3706074015614449229, guid: 9367065d5f5196a4da2b923b4f8a052d, type: 3}
   range_fishType: 0
-  minWaitTime: 0
-  maxWaitTime: 0
+  minWaitTime: 2
+  maxWaitTime: 5
 --- !u!1 &956614990
 GameObject:
   m_ObjectHideFlags: 0
