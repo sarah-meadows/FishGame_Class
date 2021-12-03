@@ -69,8 +69,8 @@ public class bobberBehavior : MonoBehaviour
         timeRemaining = maxSeconds;
 
 
-        winAlert = GameObject.Find("conditionWin");
-        loseAlert = GameObject.Find("conditionLose");
+        winAlert = GameObject.Find("Win");
+        loseAlert = GameObject.Find("Lose");
 
         winAlert.SetActive(false);
         loseAlert.SetActive(false);
