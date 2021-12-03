@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class fishConvo : MonoBehaviour
 {
@@ -25,7 +24,7 @@ public class fishConvo : MonoBehaviour
     GameObject winAnimObj;
     Camera main;
 
-    public GameObject popupLvlLoopObj;
+    GameObject popupWinLose;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +53,8 @@ public class fishConvo : MonoBehaviour
 
         endOfConvo = false;
         winLoseState = false;
-        popupLvlLoopObj.SetActive(false);
+        popupWinLose = GameObject.Find("popupWinLose");
+        popupWinLose.SetActive(false);
     }
 
     // Update is called once per frame
@@ -586,21 +586,34 @@ public class fishConvo : MonoBehaviour
         if (winLoseState == true)
         {
             print(" we win");
+            popupWinLose.SetActive(true);
+            GameObject.Find("losePopup").SetActive(false);
+
 
         }
         if (winLoseState == false)
         {
             print(" we lose");
+
+            popupWinLose.SetActive(true);
+            GameObject.Find("winPopup").SetActive(false);
+
+
             GameObject.Find("FishText").SetActive(false);
             main.gameObject.SetActive(false);
             winAnimObj.SetActive(true);
-            popupLvlLoopObj.SetActive(true);
 
+
+            /*
             if (winAnimObj.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 print("show popup");
             }
+            */
 
         }
+
     }
+
+
 }
