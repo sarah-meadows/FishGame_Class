@@ -20,7 +20,7 @@ public class fishConvo : MonoBehaviour
     Button btnContinue, btnA, btnB;
 
     bool endOfConvo;
-    bool winLoseState;
+    bool winState;
 
     // Start is called before the first frame update
     void Start()
@@ -40,9 +40,10 @@ public class fishConvo : MonoBehaviour
 
         btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
         btnContinue.gameObject.SetActive(false);
+        //btnContinue.gameObject.
         
         endOfConvo = false;
-        winLoseState = false;
+        winState = false;
 
     }
 
@@ -57,13 +58,13 @@ public class fishConvo : MonoBehaviour
             btnContinue.gameObject.SetActive(true);
 
 
-            if (winLoseState == true)
+            if (winState == true)
             {
                 print(" we win");
 
 
             }
-            if (winLoseState == false)
+            if (winState == false)
             {
                 print(" we lose");
 
@@ -424,14 +425,14 @@ public class fishConvo : MonoBehaviour
             {
                 if (convoPossibility == 0)
                 {
-                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; endOfConvo = true; winLoseState = false; return; }
+                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; endOfConvo = true; winState = false; return; }
                     if (choice == 1) { convoPossibility = 1; convoCounter = 2; return; }
                 }
 
                 if (convoPossibility == 1)
                 {
                     if (choice == 0) { convoPossibility = 2; convoCounter = 2; return; }
-                    if (choice == 1) { convoPossibility = 3; convoCounter = 2; return; }
+                    if (choice == 1) { convoPossibility = 3; convoCounter = 2; endOfConvo = true; winState = false; return; }
                 }
             }
             //////////////////////////////////
@@ -440,14 +441,14 @@ public class fishConvo : MonoBehaviour
 
                 if (convoPossibility == 1)
                 {
-                    if (choice == 0) { convoPossibility = 0; convoCounter = 3; return; }
-                    if (choice == 1) { convoPossibility = 1; convoCounter = 3; return; }
+                    if (choice == 0) { convoPossibility = 1; convoCounter = 3; return; }
+                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; endOfConvo = true; winState = false; return; }
                 }
 
                 if (convoPossibility == 2)
                 {
                     if (choice == 0) { convoPossibility = 2; convoCounter = 3; return; }
-                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; return; }
+                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; endOfConvo = true; winState = false; return; }
                 }
             }
             //////////////////////////////////
@@ -456,14 +457,14 @@ public class fishConvo : MonoBehaviour
 
                 if (convoPossibility == 1)
                 {
-                    if (choice == 0) { happyPoints++; convoPossibility = 0; convoCounter++; return; }
+                    if (choice == 0) { happyPoints++; convoPossibility = 0; convoCounter++; endOfConvo = true; winState = true; return; }
                     if (choice == 1) { happyPoints++; convoPossibility = 2; convoCounter = 3; return; }
                 }
 
                 if (convoPossibility == 2)
                 {
-                    if (choice == 0) { happyPoints++; convoPossibility = 1; convoCounter++; return; }
-                    if (choice == 1) { happyPoints++; convoPossibility = 2; convoCounter++; return; }
+                    if (choice == 0) { happyPoints++; convoPossibility = 2; convoCounter++; endOfConvo = true; winState = false; return; }
+                    if (choice == 1) { happyPoints++; convoPossibility = 1; convoCounter++; endOfConvo = true; winState = true; return; }
                 }
             }
             //////////////////////////////////
