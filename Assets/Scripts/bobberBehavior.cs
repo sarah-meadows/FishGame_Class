@@ -19,6 +19,7 @@ public class bobberBehavior : MonoBehaviour
 
     GameObject centerBobber;
     GameObject[] bounds;
+    public Slider distSlider;
 
     float inGameRange;
     float calibrateCord;
@@ -69,8 +70,8 @@ public class bobberBehavior : MonoBehaviour
         timeRemaining = maxSeconds;
 
 
-        winAlert = GameObject.Find("Win");
-        loseAlert = GameObject.Find("Lose");
+        winAlert = GameObject.Find("conditionWin");
+        loseAlert = GameObject.Find("conditionLose");
 
         winAlert.SetActive(false);
         loseAlert.SetActive(false);
@@ -120,6 +121,9 @@ public class bobberBehavior : MonoBehaviour
         ///0% is when you're dead-on
         ///the larger the percent, the further away you are
         float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
+
+
+        distSlider.value = 1 - valueAwayFromFish;
 
 
         //setting up the buzzing indicator
