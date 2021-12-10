@@ -21,6 +21,10 @@ public class fishConvo : MonoBehaviour
 
     bool endOfConvo;
     bool winLoseState;
+    GameObject winAnimObj;
+    Camera main;
+
+    GameObject popupWinLose;
 
     // Start is called before the first frame update
     void Start()
@@ -40,10 +44,17 @@ public class fishConvo : MonoBehaviour
 
         btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
         btnContinue.gameObject.SetActive(false);
-        
+        btnContinue.onClick.AddListener(continueOn);
+
+        main = Camera.main;
+
+        winAnimObj = GameObject.FindGameObjectWithTag("winAnim");
+        winAnimObj.SetActive(false);
+
         endOfConvo = false;
         winLoseState = false;
-
+        popupWinLose = GameObject.Find("popupWinLose");
+        popupWinLose.SetActive(false);
     }
 
     // Update is called once per frame
@@ -55,20 +66,6 @@ public class fishConvo : MonoBehaviour
             btnA.gameObject.SetActive(false);
             btnB.gameObject.SetActive(false);
             btnContinue.gameObject.SetActive(true);
-
-
-            if (winLoseState == true)
-            {
-                print(" we win");
-
-
-            }
-            if (winLoseState == false)
-            {
-                print(" we lose");
-
-            }
-
         }
 
 
@@ -583,4 +580,40 @@ public class fishConvo : MonoBehaviour
             }
         }
     }
+
+    void continueOn()
+    {
+        if (winLoseState == true)
+        {
+            print(" we win");
+            popupWinLose.SetActive(true);
+            GameObject.Find("losePopup").SetActive(false);
+
+
+        }
+        if (winLoseState == false)
+        {
+            print(" we lose");
+
+            popupWinLose.SetActive(true);
+            GameObject.Find("winPopup").SetActive(false);
+
+
+            GameObject.Find("FishText").SetActive(false);
+            main.gameObject.SetActive(false);
+            winAnimObj.SetActive(true);
+
+
+            /*
+            if (winAnimObj.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                print("show popup");
+            }
+            */
+
+        }
+
+    }
+
+
 }

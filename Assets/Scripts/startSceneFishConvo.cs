@@ -79,6 +79,8 @@ public class startSceneFishConvo : MonoBehaviour
             introCam.gameObject.SetActive(false);
 
             canvas.enabled = true;
+
+            this.gameObject.SetActive(false);
         }
     }
 }
