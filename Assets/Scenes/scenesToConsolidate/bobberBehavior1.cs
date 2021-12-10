@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class bobberBehavior : MonoBehaviour
+public class bobberBehavior1 : MonoBehaviour
 {
     float fishCord_X;
     float fishCord_Z;
