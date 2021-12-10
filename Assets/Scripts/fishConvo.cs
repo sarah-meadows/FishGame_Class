@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class fishConvo : MonoBehaviour
 {
+    //startSceneFishConvo startScene;
+
     int fishType;
     public int convoCounter;
     public int convoPossibility;
@@ -20,15 +22,22 @@ public class fishConvo : MonoBehaviour
     Button btnContinue, btnA, btnB;
 
     bool endOfConvo;
-    bool winLoseState;
-    GameObject winAnimObj;
-    Camera main;
-
-    GameObject popupWinLose;
+    bool winState;
 
     // Start is called before the first frame update
     void Start()
     {
+        //startScene = GetComponent<startSceneFishConvo>();
+        /*
+        Debug.Log("wow");
+        fishType = startScene.fishType;
+        
+        Debug.Log("recieve: " + fishType);
+        */
+        fishType = GameObject.Find("SceneBrain").GetComponent<startSceneFishConvo>().fishType;
+
+        Debug.Log("Recieve: " + fishType);
+
         fishStatement = GameObject.Find("FishText/Text").GetComponent<Text>();
 
         responseA = GameObject.Find("responseA/Text").GetComponent<Text>();
@@ -44,18 +53,15 @@ public class fishConvo : MonoBehaviour
 
         btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
         btnContinue.gameObject.SetActive(false);
-        btnContinue.onClick.AddListener(continueOn);
-
-        main = Camera.main;
-
-        winAnimObj = GameObject.FindGameObjectWithTag("winAnim");
-        winAnimObj.SetActive(false);
-
+        //btnContinue.gameObject.
+        
         endOfConvo = false;
-        winLoseState = false;
-        popupWinLose = GameObject.Find("popupWinLose");
-        popupWinLose.SetActive(false);
+        winState = false;
+
+        
+        
     }
+
 
     // Update is called once per frame
     void Update()
@@ -66,6 +72,20 @@ public class fishConvo : MonoBehaviour
             btnA.gameObject.SetActive(false);
             btnB.gameObject.SetActive(false);
             btnContinue.gameObject.SetActive(true);
+
+
+            if (winState == true)
+            {
+                print(" we win");
+
+
+            }
+            if (winState == false)
+            {
+                print(" we lose");
+
+            }
+
         }
 
 
@@ -421,14 +441,14 @@ public class fishConvo : MonoBehaviour
             {
                 if (convoPossibility == 0)
                 {
-                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; endOfConvo = true; winLoseState = false; return; }
+                    if (choice == 0) { convoPossibility = 0; convoCounter = 2; endOfConvo = true; winState = false; return; }
                     if (choice == 1) { convoPossibility = 1; convoCounter = 2; return; }
                 }
 
                 if (convoPossibility == 1)
                 {
                     if (choice == 0) { convoPossibility = 2; convoCounter = 2; return; }
-                    if (choice == 1) { convoPossibility = 3; convoCounter = 2; return; }
+                    if (choice == 1) { convoPossibility = 3; convoCounter = 2; endOfConvo = true; winState = false; return; }
                 }
             }
             //////////////////////////////////
@@ -437,14 +457,14 @@ public class fishConvo : MonoBehaviour
 
                 if (convoPossibility == 1)
                 {
-                    if (choice == 0) { convoPossibility = 0; convoCounter = 3; return; }
-                    if (choice == 1) { convoPossibility = 1; convoCounter = 3; return; }
+                    if (choice == 0) { convoPossibility = 1; convoCounter = 3; return; }
+                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; endOfConvo = true; winState = false; return; }
                 }
 
                 if (convoPossibility == 2)
                 {
                     if (choice == 0) { convoPossibility = 2; convoCounter = 3; return; }
-                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; return; }
+                    if (choice == 1) { convoPossibility = 0; convoCounter = 3; endOfConvo = true; winState = false; return; }
                 }
             }
             //////////////////////////////////
@@ -453,14 +473,14 @@ public class fishConvo : MonoBehaviour
 
                 if (convoPossibility == 1)
                 {
-                    if (choice == 0) { happyPoints++; convoPossibility = 0; convoCounter++; return; }
+                    if (choice == 0) { happyPoints++; convoPossibility = 0; convoCounter++; endOfConvo = true; winState = true; return; }
                     if (choice == 1) { happyPoints++; convoPossibility = 2; convoCounter = 3; return; }
                 }
 
                 if (convoPossibility == 2)
                 {
-                    if (choice == 0) { happyPoints++; convoPossibility = 1; convoCounter++; return; }
-                    if (choice == 1) { happyPoints++; convoPossibility = 2; convoCounter++; return; }
+                    if (choice == 0) { happyPoints++; convoPossibility = 2; convoCounter++; endOfConvo = true; winState = false; return; }
+                    if (choice == 1) { happyPoints++; convoPossibility = 1; convoCounter++; endOfConvo = true; winState = true; return; }
                 }
             }
             //////////////////////////////////
@@ -580,40 +600,4 @@ public class fishConvo : MonoBehaviour
             }
         }
     }
-
-    void continueOn()
-    {
-        if (winLoseState == true)
-        {
-            print(" we win");
-            popupWinLose.SetActive(true);
-            GameObject.Find("losePopup").SetActive(false);
-
-
-        }
-        if (winLoseState == false)
-        {
-            print(" we lose");
-
-            popupWinLose.SetActive(true);
-            GameObject.Find("winPopup").SetActive(false);
-
-
-            GameObject.Find("FishText").SetActive(false);
-            main.gameObject.SetActive(false);
-            winAnimObj.SetActive(true);
-
-
-            /*
-            if (winAnimObj.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
-                print("show popup");
-            }
-            */
-
-        }
-
-    }
-
-
 }
