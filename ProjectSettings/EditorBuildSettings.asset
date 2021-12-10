@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/fishingPart1_catch.unity
     guid: f55a76310827e3b4d95aefda93e85197
   - enabled: 1
-    path: Assets/Scenes/fishingPart2_dialogue.unity
+    path: Assets/Scenes/scenesToConsolidate/fishingPart2_dialogue.unity
     guid: aaf35091743c7424fac309a3e41bfe57
   m_configObjects: {}
