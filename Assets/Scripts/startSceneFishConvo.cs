@@ -18,21 +18,18 @@ public class startSceneFishConvo : MonoBehaviour
 
     public bool introIsComplete;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         fishType = Random.Range(1, 3);
         Debug.Log("send: " + fishType);
+    }
 
-        Debug.Log("piss");
+    // Start is called before the first frame update
+    void Start()
+    {
+       
 
         ObjForIntro = GameObject.Find("ObjForIntro");
-
-        Debug.Log("hehe0");
-
-        //fishModel = GameObject.FindGameObjectWithTag("fishModelHere");
-
-        Debug.Log("fuck");
 
         mainAnimation = ObjForIntro.GetComponent<Animator>();
 
@@ -64,8 +61,6 @@ public class startSceneFishConvo : MonoBehaviour
             introIsComplete = true;
         }
         */
-
-        Debug.Log(mainAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime);
 
         if (mainAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {

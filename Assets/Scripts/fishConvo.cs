@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class fishConvo : MonoBehaviour
 {
-    startSceneFishConvo startScene;
+    //startSceneFishConvo startScene;
 
     int fishType;
     public int convoCounter;
@@ -27,12 +27,17 @@ public class fishConvo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startScene = GetComponent<startSceneFishConvo>();
+        //startScene = GetComponent<startSceneFishConvo>();
         /*
         Debug.Log("wow");
         fishType = startScene.fishType;
+        
         Debug.Log("recieve: " + fishType);
         */
+        fishType = GameObject.Find("SceneBrain").GetComponent<startSceneFishConvo>().fishType;
+
+        Debug.Log("Recieve: " + fishType);
+
         fishStatement = GameObject.Find("FishText/Text").GetComponent<Text>();
 
         responseA = GameObject.Find("responseA/Text").GetComponent<Text>();
