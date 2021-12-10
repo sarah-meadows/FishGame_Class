@@ -20,6 +20,7 @@ public class fishConvo : MonoBehaviour
     Text responseA, responseB, responseC;
 
     Button btnContinue, btnA, btnB;
+    GameObject winPopUp, losePopUp;
 
     bool endOfConvo;
     bool winState;
@@ -43,9 +44,11 @@ public class fishConvo : MonoBehaviour
         responseA = GameObject.Find("responseA/Text").GetComponent<Text>();
         responseB = GameObject.Find("responseB/Text").GetComponent<Text>();
 
-
         btnA = GameObject.Find("responseA").GetComponent<Button>();
         btnB = GameObject.Find("responseB").GetComponent<Button>();
+
+        winPopUp = GameObject.Find("WinPopUp");
+        losePopUp = GameObject.Find("LosePopUp");
 
 
         btnA.onClick.AddListener(answerOptions);
@@ -54,7 +57,10 @@ public class fishConvo : MonoBehaviour
         //btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
         //btnContinue.gameObject.SetActive(false);
         //btnContinue.gameObject.
-        
+
+        winPopUp.gameObject.SetActive(false);
+        losePopUp.gameObject.SetActive(false);
+
         endOfConvo = false;
         winState = false;
 
@@ -76,6 +82,7 @@ public class fishConvo : MonoBehaviour
 
             if (winState == true)
             {
+                winPopUp.gameObject.SetActive(true);
                 print(" we win");
                 //Trigger the ending animation...
                 //also, turn on WinPopUp
@@ -84,6 +91,7 @@ public class fishConvo : MonoBehaviour
             }
             if (winState == false)
             {
+                losePopUp.gameObject.SetActive(true);
                 print(" we lose");
                 //Trigger the ending animation...
                 //also, turn on LosePopUp
