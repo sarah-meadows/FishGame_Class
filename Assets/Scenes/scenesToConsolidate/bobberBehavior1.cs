@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class bobberBehavior : MonoBehaviour
+public class bobberBehavior1 : MonoBehaviour
 {
     float fishCord_X;
     float fishCord_Z;
@@ -19,15 +19,14 @@ public class bobberBehavior : MonoBehaviour
 
     GameObject centerBobber;
     GameObject[] bounds;
+    public Slider distSlider;
 
     float inGameRange;
     float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
     public float distFromTarget, valueAwayFromFish;
-
-    Slider proximitySlider;
-
+    
     Image clock;
     float maxSeconds = 10f;
     float timeRemaining;
@@ -57,7 +56,6 @@ public class bobberBehavior : MonoBehaviour
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
         calibrateCord = inGameRange * (1 / fishRange);
 
-        proximitySlider = GameObject.Find("proximitySlider").GetComponent<Slider>();
 
         //This is the ingame cordinates of the fish position
         float newX = (fishCord_X * calibrateCord) + centerBobber.transform.position.x;
@@ -74,6 +72,7 @@ public class bobberBehavior : MonoBehaviour
 
         winAlert = GameObject.Find("Win");
         loseAlert = GameObject.Find("Lose");
+        distSlider = GameObject.Find("distSlider").GetComponent<Slider>();
 
         winAlert.SetActive(false);
         loseAlert.SetActive(false);
@@ -125,13 +124,7 @@ public class bobberBehavior : MonoBehaviour
         float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
 
 
-        proximitySlider.value = 1 - valueAwayFromFish;
-
-
-
-
-
-
+        distSlider.value = 1 - valueAwayFromFish;
 
 
         //setting up the buzzing indicator

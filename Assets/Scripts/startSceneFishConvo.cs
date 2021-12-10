@@ -8,8 +8,9 @@ public class startSceneFishConvo : MonoBehaviour
     GameObject ObjForIntro;
     GameObject fishModel;
 
+    public int fishType;
+
     Animator mainAnimation;
-    Animator fishAnim;
 
     Camera introCam, mainCam;
 
@@ -17,14 +18,20 @@ public class startSceneFishConvo : MonoBehaviour
 
     public bool introIsComplete;
 
+    private void Awake()
+    {
+        fishType = Random.Range(1, 3);
+        Debug.Log("send: " + fishType);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+       
+
         ObjForIntro = GameObject.Find("ObjForIntro");
-        fishModel = GameObject.FindGameObjectWithTag("introFish");
 
         mainAnimation = ObjForIntro.GetComponent<Animator>();
-        fishAnim = fishModel.GetComponent<Animator>();
 
         introCam = GameObject.Find("IntroCam").GetComponent<Camera>();
         mainCam = Camera.main;
@@ -54,13 +61,12 @@ public class startSceneFishConvo : MonoBehaviour
             introIsComplete = true;
         }
         */
-       
-        
-        
+
         if (mainAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
         {
-         //   if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-         //   {
+            //   if (fishAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            //   {
+            
                 introIsComplete = true;
           //  }
         }
@@ -71,6 +77,7 @@ public class startSceneFishConvo : MonoBehaviour
             mainCam.gameObject.SetActive(false);
             introCam.gameObject.SetActive(true);
 
+            canvas.enabled = false;
         }
 
         if (introIsComplete)

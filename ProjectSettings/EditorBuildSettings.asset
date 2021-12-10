@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LonaScene.unity
     guid: 7a625a39faa947b419bfcf849f914068
   - enabled: 1
-    path: Assets/Scenes/fishingPart2_dialogue.unity
+    path: Assets/Scenes/scenesToConsolidate/fishingPart2_dialogue.unity
     guid: aaf35091743c7424fac309a3e41bfe57
   - enabled: 0
     path: Assets/Scenes/fishingPart1_catch.unity
