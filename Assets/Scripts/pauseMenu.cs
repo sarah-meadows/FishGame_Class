@@ -21,14 +21,14 @@ public class pauseMenu : MonoBehaviour
 			}
 		}
 	}
-	void Resume ()
+	public void Resume ()
 	{
 	pausemanager.SetActive(false);
 	Time.timeScale = 1f;
 	GameIsPause = false;
 	}
 
-	void Pause()
+	public void Pause()
 	{
 	pausemanager.SetActive(true);
 	Time.timeScale = 0f;
