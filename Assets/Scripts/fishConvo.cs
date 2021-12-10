@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class fishConvo : MonoBehaviour
 {
+    startSceneFishConvo startScene;
+
     int fishType;
     public int convoCounter;
     public int convoPossibility;
@@ -25,6 +27,12 @@ public class fishConvo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startScene = GetComponent<startSceneFishConvo>();
+        /*
+        Debug.Log("wow");
+        fishType = startScene.fishType;
+        Debug.Log("recieve: " + fishType);
+        */
         fishStatement = GameObject.Find("FishText/Text").GetComponent<Text>();
 
         responseA = GameObject.Find("responseA/Text").GetComponent<Text>();
@@ -45,7 +53,10 @@ public class fishConvo : MonoBehaviour
         endOfConvo = false;
         winState = false;
 
+        
+        
     }
+
 
     // Update is called once per frame
     void Update()
