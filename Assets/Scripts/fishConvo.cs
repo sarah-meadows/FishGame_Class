@@ -51,8 +51,8 @@ public class fishConvo : MonoBehaviour
         btnA.onClick.AddListener(answerOptions);
         btnB.onClick.AddListener(answerOptions);
 
-        btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
-        btnContinue.gameObject.SetActive(false);
+        //btnContinue = GameObject.Find("clickContinue").GetComponent<Button>();
+        //btnContinue.gameObject.SetActive(false);
         //btnContinue.gameObject.
         
         endOfConvo = false;
@@ -71,7 +71,7 @@ public class fishConvo : MonoBehaviour
             //if the end of the conversation happens...
             btnA.gameObject.SetActive(false);
             btnB.gameObject.SetActive(false);
-            btnContinue.gameObject.SetActive(true);
+            //btnContinue.gameObject.SetActive(true);
 
 
             if (winState == true)
