@@ -20,7 +20,8 @@ public class startSceneFishConvo : MonoBehaviour
 
     private void Awake()
     {
-        fishType = Random.Range(1, 3);
+        //fishType = Random.Range(0, 2);
+        fishType = 0;
         Debug.Log("send: " + fishType);
     }
 

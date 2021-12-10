@@ -11,22 +11,21 @@ public class bobberBehavior : MonoBehaviour
     float curCord_X;
     float curCord_Z;
 
-    public float fishRange=500;
+    public float fishRange = 500;
     public float withinTarget = 10f;
-    float bobSpeed=4;
+    float bobSpeed = 4;
 
     bool tiltLeft, tiltRight, tiltUp, tiltDown;
 
     GameObject centerBobber;
     GameObject[] bounds;
+    public Slider distSlider;
 
     float inGameRange;
     float calibrateCord;
 
     Vector3 fishTargetPos, curTargetPos;
     public float distFromTarget, valueAwayFromFish;
-
-    Slider proximitySlider;
 
     Image clock;
     float maxSeconds = 10f;
@@ -53,11 +52,10 @@ public class bobberBehavior : MonoBehaviour
 
         centerBobber = GameObject.Find("bobberCenter");
         bounds = GameObject.FindGameObjectsWithTag("bobberLimit");
-        
+
         inGameRange = Vector3.Distance(bounds[0].transform.position, centerBobber.transform.position);
         calibrateCord = inGameRange * (1 / fishRange);
 
-        proximitySlider = GameObject.Find("proximitySlider").GetComponent<Slider>();
 
         //This is the ingame cordinates of the fish position
         float newX = (fishCord_X * calibrateCord) + centerBobber.transform.position.x;
@@ -74,6 +72,7 @@ public class bobberBehavior : MonoBehaviour
 
         winAlert = GameObject.Find("Win");
         loseAlert = GameObject.Find("Lose");
+        distSlider = GameObject.Find("distSlider").GetComponent<Slider>();
 
         winAlert.SetActive(false);
         loseAlert.SetActive(false);
@@ -92,7 +91,7 @@ public class bobberBehavior : MonoBehaviour
          * calculating if there is any user input via button press or tilting. 
          * Set bool true if actions occur
          * */
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) { tiltUp = true; } else { tiltUp=false;}
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) { tiltUp = true; } else { tiltUp = false; }
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) { tiltDown = true; } else { tiltDown = false; }
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) { tiltLeft = true; } else { tiltLeft = false; }
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) { tiltRight = true; } else { tiltRight = false; }
@@ -102,7 +101,7 @@ public class bobberBehavior : MonoBehaviour
          * */
         if (tiltUp) { curCord_Z += bobSpeed; }
         if (tiltDown) { curCord_Z -= bobSpeed; }
-        
+
         if (tiltRight) { curCord_X += bobSpeed; }
         if (tiltLeft) { curCord_X -= bobSpeed; }
 
@@ -110,8 +109,8 @@ public class bobberBehavior : MonoBehaviour
         //This will translate the bobber accordingly
         float curX = (curCord_X * calibrateCord) + centerBobber.transform.position.x;
         float curY = centerBobber.transform.position.y;
-        float curZ = (curCord_Z * calibrateCord) + centerBobber.transform.position.z;        
-        
+        float curZ = (curCord_Z * calibrateCord) + centerBobber.transform.position.z;
+
         curTargetPos = new Vector3(curX, curY, curZ);
         this.transform.position = curTargetPos;
 
@@ -125,18 +124,12 @@ public class bobberBehavior : MonoBehaviour
         float percentageFromFish = Mathf.Round((valueAwayFromFish * 100) * 10.0f) * 0.1f;
 
 
-        proximitySlider.value = 1 - valueAwayFromFish;
-
-
-
-
-
-
+        distSlider.value = 1 - valueAwayFromFish;
 
 
         //setting up the buzzing indicator
-        if (!buzzTimerIsBusy){StartCoroutine(buzzIndicate());}
-        
+        if (!buzzTimerIsBusy) { StartCoroutine(buzzIndicate()); }
+
 
         //Setting up our timer and win conditions
         if (timeRemaining > 0)
@@ -144,11 +137,11 @@ public class bobberBehavior : MonoBehaviour
             timeRemaining -= Time.deltaTime;
             clock.fillAmount = timeRemaining / maxSeconds;
         }
-        if(timeRemaining <= 0)
+        if (timeRemaining <= 0)
         {
 
-            if (percentageFromFish <= withinTarget){winGame=true; }
-            else if (percentageFromFish > withinTarget){ winGame = false; }
+            if (percentageFromFish <= withinTarget) { winGame = true; }
+            else if (percentageFromFish > withinTarget) { winGame = false; }
 
             if (winGame)
             {
@@ -172,7 +165,7 @@ public class bobberBehavior : MonoBehaviour
     IEnumerator buzzIndicate()
     {
         buzzTimerIsBusy = true;
-                
+
         yield return new WaitForSeconds(valueAwayFromFish);
         buzzColor = new Color32(0, 19, 225, 20);
         BuzzTEST.color = buzzColor;
@@ -204,4 +197,3 @@ public class bobberBehavior : MonoBehaviour
 ///if you're close the percent is low, thus the buzz will fire more often
 ///_We need to make a fish can get away if you're not careful
 ///
-
