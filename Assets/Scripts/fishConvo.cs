@@ -77,12 +77,16 @@ public class fishConvo : MonoBehaviour
             if (winState == true)
             {
                 print(" we win");
+                //Trigger the ending animation...
+                //also, turn on WinPopUp
 
 
             }
             if (winState == false)
             {
                 print(" we lose");
+                //Trigger the ending animation...
+                //also, turn on LosePopUp
 
             }
 
